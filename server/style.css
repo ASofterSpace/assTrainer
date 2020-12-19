@@ -1,8 +1,8 @@
 body {
 	font-family: "Calibri";
 	overflow: hidden;
-	background: linear-gradient(179deg, #102, #201, #102, #201, #102, #201, #102, #201, #102);
-	padding-left: 4pt;
+	background: linear-gradient(170deg, #102, #211, #102, #201, #102, #021, #102, #102);
+	padding-left: 212pt;
 	padding-right: 60pt;
 }
 
@@ -24,6 +24,17 @@ input, textarea, select {
 	padding: 0pt 4pt 1pt 4pt;
 	font-family: "Calibri";
 	font-size: 1em;
+}
+
+img.avatar, div#tabList {
+	position: absolute;
+	left: 10pt;
+	width: 200pt;
+}
+
+img.avatar {
+	top: 10pt;
+	border-radius: 20pt;
 }
 
 div#mainContent {
