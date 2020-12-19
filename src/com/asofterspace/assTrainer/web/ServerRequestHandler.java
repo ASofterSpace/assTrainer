@@ -21,7 +21,10 @@ import com.asofterspace.toolbox.web.WebServerRequestHandler;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class ServerRequestHandler extends WebServerRequestHandler {
@@ -29,6 +32,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 	private Database database;
 
 	private Directory serverDir;
+
+	private Random rand;
 
 
 	public ServerRequestHandler(WebServer server, Socket request, Directory webRoot, Directory serverDir,
@@ -39,6 +44,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		this.database = database;
 
 		this.serverDir = serverDir;
+
+		this.rand = new Random();
 	}
 
 	@Override
@@ -128,6 +135,83 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
 				SideBarCtrl.getSidebarHtmlStr(SideBarEntry.ZARA));
+
+			StringBuilder exHtml = new StringBuilder();
+
+			exHtml.append("<div>");
+			exHtml.append("<div>For the warmup, how about these:</div>");
+
+			List<String> exercises = new ArrayList<>();
+			exercises.add("Hampelmensch");
+			exercises.add("Fußkreisen");
+			exercises.add("Zehen heranziehen");
+			exercises.add("Zombie Walk");
+			exercises.add("Arme vor und zurück schwingen");
+
+			for (int i = 0; i < 3; i++) {
+				int cur = rand.nextInt(exercises.size());
+				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
+				exercises.remove(cur);
+			}
+			exHtml.append("</div>");
+
+			exHtml.append("<div>");
+			exHtml.append("<div>And now the fun begins! Carry on with sets of:</div>");
+
+			exercises = new ArrayList<>();
+			exercises.add("Jogging around the block");
+			exercises.add("Lunges");
+			exercises.add("Lunges mit erhöhtem hinteren Fuß");
+			exercises.add("Walking Lunges");
+			exercises.add("Liegestütze / Pushups");
+			exercises.add("Inverted Pushups (down however you want, but up nicely)");
+			exercises.add("Pike Pushups (so pushups in pike position)");
+			exercises.add("Pike to Pushup (from pushup to pike position, back and forth)");
+			exercises.add("Middle to Pushup to Middle to Sunseeker to Middle");
+			exercises.add("Reverse Crunch");
+			exercises.add("Sunseeker");
+			exercises.add("Single-leg Hip Thrust");
+			exercises.add("Burpees");
+			exercises.add("Plank Hold");
+			exercises.add("Plank Walk (move Elbows while keeping feet constant)");
+			exercises.add("High-knee Run");
+			exercises.add("Squat");
+			exercises.add("Glute Bridge");
+			exercises.add("Wall Sit");
+			exercises.add("Good Morning");
+			exercises.add("Schiffchen");
+			exercises.add("Tabletop Crunch");
+			exercises.add("Mountain Climbers");
+			exercises.add("Sit down, reach for an object and stand up, sit down again and so on");
+
+			for (int i = 0; i < 8; i++) {
+				int cur = rand.nextInt(exercises.size());
+				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
+				exercises.remove(cur);
+			}
+			exHtml.append("</div>");
+
+			exHtml.append("<div>");
+			exHtml.append("<div>If you have the necessary equipment, you can also replace exercises " +
+				"with some of these:</div>");
+
+			exercises = new ArrayList<>();
+			exercises.add("Flat Dumbbell Press");
+			exercises.add("Kettlebell Power Snatch");
+			exercises.add("Dumbbell Triceps Overhead Extensions");
+			exercises.add("Dips");
+			exercises.add("Unter Tisch liegen und hochziehen");
+			exercises.add("Scapula Pullup (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
+			exercises.add("Knee Pullup (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
+
+			for (int i = 0; i < 4; i++) {
+				int cur = rand.nextInt(exercises.size());
+				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
+				exercises.remove(cur);
+			}
+			exHtml.append("</div>");
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[SPORTS_EXERCISE]]", exHtml.toString());
 
 			return new WebServerAnswerInHtml(indexContent);
 		}
