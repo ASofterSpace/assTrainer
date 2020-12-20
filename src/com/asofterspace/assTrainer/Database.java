@@ -12,6 +12,8 @@ import com.asofterspace.toolbox.utils.Record;
 
 public class Database {
 
+	private final static String USERNAME = "username";
+
 	private final static String PORT = "port";
 
 	private JsonFile dbFile;
@@ -19,6 +21,8 @@ public class Database {
 	private JSON root;
 
 	private Integer port;
+
+	private String username;
 
 
 	public Database() {
@@ -34,6 +38,8 @@ public class Database {
 		}
 
 		this.port = root.getInteger(PORT);
+
+		this.username = root.getString(USERNAME);
 	}
 
 	public Record getRoot() {
@@ -46,6 +52,8 @@ public class Database {
 
 		root.set(PORT, port);
 
+		root.set(USERNAME, username);
+
 		dbFile.setAllContents(root);
 		dbFile.save();
 	}
@@ -55,6 +63,10 @@ public class Database {
 			return 3014;
 		}
 		return port;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 }

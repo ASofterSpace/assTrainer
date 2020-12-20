@@ -136,6 +136,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
 				SideBarCtrl.getSidebarHtmlStr(SideBarEntry.ZARA));
 
+			indexContent = StrUtils.replaceAll(indexContent, "[[USERNAME]]", database.getUsername());
+
 			StringBuilder exHtml = new StringBuilder();
 
 			exHtml.append("<div>");
