@@ -77,6 +77,12 @@ span.button.checked {
 	background: rgba(150, 200, 250, 0.6);
 }
 
+span.vertAligner {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
 div.line:hover {
 	background: rgba(255, 0, 255, 0.19);
 	border-radius: 4pt;
