@@ -148,9 +148,10 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			exercises.add("Fußkreisen");
 			exercises.add("Zehen heranziehen");
 			exercises.add("Zombie Walk");
+			exercises.add("Duck Walk");
 			exercises.add("Arme vor und zurück schwingen");
 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 4; i++) {
 				int cur = rand.nextInt(exercises.size());
 				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
 				exercises.remove(cur);
