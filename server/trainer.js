@@ -26,6 +26,31 @@ window.trainer = {
 		}
 	},
 
+	startTimer: function() {
+		this.curTimerTime = parseInt(document.getElementById("timerTimeField").value);
+		document.getElementById("timerTime").innerHTML = this.curTimerTime + " seconds";
+		document.getElementById("timerBG").style.display = "block";
+		document.getElementById("timerTime").style.display = "block";
+		this.ongoingTimer = window.setInterval(function() {
+			window.trainer.curTimerTime -= 1;
+			if (window.trainer.curTimerTime < 0) {
+				window.trainer.stopTimer();
+			} else if (window.trainer.curTimerTime < 1) {
+				document.getElementById("timerTime").innerHTML = "Done!";
+			} else if (window.trainer.curTimerTime < 2) {
+				document.getElementById("timerTime").innerHTML = "1 second";
+			} else {
+				document.getElementById("timerTime").innerHTML = window.trainer.curTimerTime + " seconds";
+			}
+		}, 1000);
+	},
+
+	stopTimer: function() {
+		document.getElementById("timerBG").style.display = "none";
+		document.getElementById("timerTime").style.display = "none";
+		window.clearInterval(this.ongoingTimer);
+	},
+
 }
 
 

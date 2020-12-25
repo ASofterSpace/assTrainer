@@ -13,6 +13,7 @@ import com.asofterspace.toolbox.io.TextFile;
 import com.asofterspace.toolbox.utils.StrUtils;
 import com.asofterspace.toolbox.virtualEmployees.SideBarCtrl;
 import com.asofterspace.toolbox.virtualEmployees.SideBarEntry;
+import com.asofterspace.toolbox.virtualEmployees.SideBarEntryForEmployee;
 import com.asofterspace.toolbox.web.WebServer;
 import com.asofterspace.toolbox.web.WebServerAnswer;
 import com.asofterspace.toolbox.web.WebServerAnswerInHtml;
@@ -134,7 +135,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			String indexContent = indexBaseFile.getContent();
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
-				SideBarCtrl.getSidebarHtmlStr(SideBarEntry.ZARA));
+				SideBarCtrl.getSidebarHtmlStr(new SideBarEntryForEmployee("Zara")));
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[USERNAME]]", database.getUsername());
 

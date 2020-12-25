@@ -26,6 +26,17 @@
 			</div>
 
 			[[SPORTS_EXERCISE]]
+
+			<div style="position: absolute;top: 5pt;right: 5pt;">
+				<span class="button" onclick="trainer.startTimer()">Start Timer</span> for
+				<input id="timerTimeField" type="text" value="90" style="width:35pt;" /> seconds
+			</div>
+
+			<div id="timerBG" onclick="trainer.stopTimer()" style="display: none; z-index: 500; position: fixed; background: black none repeat scroll 0% 0%; opacity: 0.65; top: 0; right: 0; bottom: 0; left: 0pt;">
+			</div>
+
+			<div id="timerTime" style="display: none; z-index: 1500; position: absolute; left: 0pt; right: 0pt; top: 39%; text-align: center;font-size: 65pt;">
+			</div>
 		</div>
 
 		@include(inc_common_end.htm)
