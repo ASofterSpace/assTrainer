@@ -1,5 +1,12 @@
 window.trainer = {
 
+	// amount of seconds until timer starts
+	curTimerPreTime: null,
+
+	// amount of seconds left on timer
+	curTimerTime: null,
+
+
 	onResize: function() {
 
 		var retry = false;
@@ -27,11 +34,19 @@ window.trainer = {
 	},
 
 	startTimer: function() {
-		this.curTimerTime = parseInt(document.getElementById("timerTimeField").value);
-		document.getElementById("timerTime").innerHTML = this.curTimerTime + " seconds";
+		this.curTimerPreTime = 5;
+		this.curTimerTime = parseInt(document.getElementById("timerTimeField").value) + 1;
+		document.getElementById("timerTime").innerHTML = "Timer starts in " + this.curTimerPreTime + " seconds";
 		document.getElementById("timerBG").style.display = "block";
 		document.getElementById("timerTime").style.display = "block";
 		this.ongoingTimer = window.setInterval(function() {
+			if (window.trainer.curTimerPreTime > 1) {
+				window.trainer.curTimerPreTime -= 1;
+				document.getElementById("timerTime").innerHTML =
+					"Timer starts in " + window.trainer.curTimerPreTime + " second" +
+					(window.trainer.curTimerPreTime == 1 ? "" : "s")
+				return;
+			}
 			window.trainer.curTimerTime -= 1;
 			if (window.trainer.curTimerTime < 0) {
 				window.trainer.stopTimer();
