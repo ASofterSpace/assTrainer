@@ -6,6 +6,9 @@ window.trainer = {
 	// amount of seconds left on timer
 	curTimerTime: null,
 
+	// the date time at which the training started
+	trainingStartTime: null,
+
 
 	onResize: function() {
 
@@ -66,11 +69,43 @@ window.trainer = {
 		window.clearInterval(this.ongoingTimer);
 	},
 
+	startTraining: function() {
+		this.trainingStartTime = toolbox.utils.DateUtils.now();
+	}
+
 }
 
 
 
 window.addEventListener("resize", window.trainer.onResize);
+
+
+// every half second, update the time since start of the training
+window.setInterval(function() {
+	var timeSinceTrainingStartLabel = document.getElementById("timeSinceTrainingStartLabel");
+	if (toolbox && timeSinceTrainingStartLabel && window.trainer.trainingStartTime) {
+		var DateUtils = toolbox.utils.DateUtils;
+		if (DateUtils) {
+			var now = DateUtils.now();
+			var diff = now.getTime() - window.trainer.trainingStartTime.getTime();
+			var diffDate = new Date(diff);
+			var hrs = diffDate.getUTCHours();
+			var min = diffDate.getUTCMinutes();
+			var sec = diffDate.getUTCSeconds();
+
+			var html = "Training started ";
+			if (hrs > 0) {
+				html += hrs + " hour" + (hrs == 1 ? "" : "s") + ", ";
+			}
+			if (min > 0) {
+				html += min + " minute" + (min == 1 ? "" : "s") + ", ";
+			}
+			html += sec + " second" + (sec == 1 ? "" : "s") + " ago...";
+
+			timeSinceTrainingStartLabel.innerHTML = html;
+		}
+	}
+}, 500);
 
 
 window.trainer.onResize();

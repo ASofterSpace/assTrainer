@@ -1,6 +1,6 @@
 # assTrainer
 
-**Class:** Utility
+**Class:** A Softer Space Internal
 
 **Language:** Java
 

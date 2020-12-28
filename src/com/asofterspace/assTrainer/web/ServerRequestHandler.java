@@ -204,9 +204,9 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			exercises.add("Kettlebell Power Snatch");
 			exercises.add("Dumbbell Triceps Overhead Extensions");
 			exercises.add("Dips");
-			exercises.add("Unter Tisch liegen und hochziehen");
-			exercises.add("Scapula Pullup (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
-			exercises.add("Knee Pullup (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
+			exercises.add("Horizontal Pullups: Unter Tisch liegen und hochziehen");
+			exercises.add("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
+			exercises.add("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
 
 			for (int i = 0; i < 4; i++) {
 				int cur = rand.nextInt(exercises.size());
