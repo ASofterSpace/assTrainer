@@ -38,7 +38,11 @@ window.trainer = {
 
 	startTimer: function() {
 		this.curTimerPreTime = 5;
-		this.curTimerTime = parseInt(document.getElementById("timerTimeField").value) + 1;
+		// accept o and O as 0 in the time field
+		var timerTimeVal = document.getElementById("timerTimeField").value;
+		timerTimeVal = timerTimeVal.split("o").join("0");
+		timerTimeVal = timerTimeVal.split("O").join("0");
+		this.curTimerTime = parseInt(timerTimeVal) + 1;
 		document.getElementById("timerTime").innerHTML = "Timer starts in " + this.curTimerPreTime + " seconds";
 		document.getElementById("timerBG").style.display = "block";
 		document.getElementById("timerTime").style.display = "block";
