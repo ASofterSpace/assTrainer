@@ -55,6 +55,8 @@ public class SportsCtrl {
 		exercises.add("Schiffchen");
 		exercises.add("Tabletop Crunch");
 		exercises.add("Mountain Climbers");
+		exercises.add("Standwaage");
+		exercises.add("Arme ausstrecken und 3 Minuten ausgestreckt lassen (2 Sets, nicht 3)");
 		exercises.add("Sit down, reach for an object and stand up, sit down again and so on");
 		return exercises;
 	}
@@ -65,6 +67,7 @@ public class SportsCtrl {
 	public static List<String> getGymExercises() {
 
 		List<String> exercises = new ArrayList<>();
+		exercises.add("Run Up and Down some Stairs");
 		exercises.add("Flat Dumbbell Press");
 		exercises.add("Kettlebell Power Snatch");
 		exercises.add("Dumbbell Triceps Overhead Extensions");
