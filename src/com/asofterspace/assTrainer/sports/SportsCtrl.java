@@ -23,6 +23,7 @@ public class SportsCtrl {
 		exercises.add("Duck Walk");
 		exercises.add("Arme vor und zurück schwingen");
 		exercises.add("Kniekreisen");
+		exercises.add("Ausfallschritt, dann die Füße so lassen und den Oberkörper von einer Seite zur anderen drehen, mit den Armen fröhlich mitschwingen, und zurück, und hin und her und so weiter :D");
 		return exercises;
 	}
 
