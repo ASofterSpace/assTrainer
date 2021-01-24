@@ -52,7 +52,7 @@ public class SportsCtrl {
 		exercises.add("Glute Bridge");
 		exercises.add("Wall Sit");
 		exercises.add("Good Morning");
-		exercises.add("Schiffchen");
+		exercises.add("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)");
 		exercises.add("Tabletop Crunch");
 		exercises.add("Mountain Climbers");
 		exercises.add("Standwaage");
