@@ -113,6 +113,10 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			location = "/" + location;
 		}
 
+		if (location.equals("/exit")) {
+			System.exit(0);
+		}
+
 /*
 		if ("/task".equals(location)) {
 			String id = arguments.get("id");

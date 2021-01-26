@@ -50,6 +50,7 @@ public class SportsCtrl {
 		exercises.add("Plank Walk (move Elbows while keeping feet constant)");
 		exercises.add("High-knee Run");
 		exercises.add("Squat");
+		exercises.add("Pistol Squat (squat on one leg only)");
 		exercises.add("Glute Bridge");
 		exercises.add("Wall Sit");
 		exercises.add("Good Morning");

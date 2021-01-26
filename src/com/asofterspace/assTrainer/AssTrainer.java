@@ -21,8 +21,8 @@ public class AssTrainer {
 	public final static String WEB_ROOT_DIR = "deployed";
 
 	public final static String PROGRAM_TITLE = "assTrainer";
-	public final static String VERSION_NUMBER = "0.0.0.4(" + Utils.TOOLBOX_VERSION_NUMBER + ")";
-	public final static String VERSION_DATE = "19. December 2020 - 24. January 2021";
+	public final static String VERSION_NUMBER = "0.0.0.5(" + Utils.TOOLBOX_VERSION_NUMBER + ")";
+	public final static String VERSION_DATE = "19. December 2020 - 26. January 2021";
 
 
 	public static void main(String[] args) {
