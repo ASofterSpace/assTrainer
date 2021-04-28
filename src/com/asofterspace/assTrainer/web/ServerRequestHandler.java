@@ -145,38 +145,28 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			StringBuilder exHtml = new StringBuilder();
 
+			String leaveout = arguments.get("leaveout");
+
 			exHtml.append("<div>");
 			exHtml.append("<div>For the warmup, how about these:</div>");
 
-			List<String> exercises = SportsCtrl.getWarmupExercises();
-			for (int i = 0; i < 4; i++) {
-				int cur = rand.nextInt(exercises.size());
-				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
-				exercises.remove(cur);
-			}
+			List<String> exercises = SportsCtrl.getWarmupExercises(leaveout);
+			addExercisesToHtml(exHtml, exercises, 4);
 			exHtml.append("</div>");
 
 			exHtml.append("<div>");
 			exHtml.append("<div>And now the fun begins! Carry on with sets of:</div>");
 
-			exercises = SportsCtrl.getMainExercises();
-			for (int i = 0; i < 8; i++) {
-				int cur = rand.nextInt(exercises.size());
-				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
-				exercises.remove(cur);
-			}
+			exercises = SportsCtrl.getMainExercises(leaveout);
+			addExercisesToHtml(exHtml, exercises, 8);
 			exHtml.append("</div>");
 
 			exHtml.append("<div>");
 			exHtml.append("<div>If you have the necessary equipment, you can also replace exercises " +
 				"with some of these:</div>");
 
-			exercises = SportsCtrl.getGymExercises();
-			for (int i = 0; i < 4; i++) {
-				int cur = rand.nextInt(exercises.size());
-				exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
-				exercises.remove(cur);
-			}
+			exercises = SportsCtrl.getGymExercises(leaveout);
+			addExercisesToHtml(exHtml, exercises, 4);
 			exHtml.append("</div>");
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[SPORTS_EXERCISE]]", exHtml.toString());
@@ -185,6 +175,22 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		}
 
 		return null;
+	}
+
+	private void addExercisesToHtml(StringBuilder exHtml, List<String> exercises, int howMany) {
+
+		for (int i = 0; i < howMany; i++) {
+
+			int cur = rand.nextInt(exercises.size());
+			exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
+			exercises.remove(cur);
+
+			// if there are no more exercises to pick from... well, then let's pick fewer ones
+			// instead of exploding
+			if (exercises.size() < 1) {
+				return;
+			}
+		}
 	}
 
 	@Override

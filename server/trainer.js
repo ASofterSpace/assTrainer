@@ -36,6 +36,10 @@ window.trainer = {
 		}
 	},
 
+	leaveOut: function(whatToLeaveOut) {
+		window.location.href = "?leaveout=" + whatToLeaveOut;
+	},
+
 	startTimer: function() {
 		this.curTimerPreTime = 5;
 		// accept o and O as 0 in the time field
