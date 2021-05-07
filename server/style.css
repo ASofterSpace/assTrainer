@@ -84,6 +84,10 @@ span.vertAligner {
 	vertical-align: middle;
 }
 
+div.line {
+	cursor: pointer;
+}
+
 div.line:hover {
 	background: rgba(255, 0, 255, 0.19);
 	border-radius: 4pt;
@@ -95,6 +99,12 @@ div.line > span {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	vertical-align: top;
+}
+
+div.done {
+	color: #1E1;
+	font-style: italic;
+	padding-left: 8pt;
 }
 
 a.sidebar, div.sidebar, div.projectbar {

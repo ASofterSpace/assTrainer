@@ -79,7 +79,18 @@ window.trainer = {
 
 	startTraining: function() {
 		this.trainingStartTime = toolbox.utils.DateUtils.now();
-	}
+	},
+
+	lineClick: function(lineId) {
+		var line = document.getElementById("line-" + lineId);
+		if (line) {
+			if (line.className == "line") {
+				line.className = "line done";
+			} else {
+				line.className = "line";
+			}
+		}
+	},
 
 }
 

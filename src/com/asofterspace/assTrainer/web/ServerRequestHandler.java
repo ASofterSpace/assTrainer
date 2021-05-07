@@ -36,6 +36,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 	private Random rand;
 
+	private int lineId = 0;
+
 
 	public ServerRequestHandler(WebServer server, Socket request, Directory webRoot, Directory serverDir,
 		Database database) {
@@ -182,7 +184,10 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		for (int i = 0; i < howMany; i++) {
 
 			int cur = rand.nextInt(exercises.size());
-			exHtml.append("<div class=\"line\">* " + exercises.get(cur) + "</div>");
+			lineId++;
+			exHtml.append("<div id=\"line-" + lineId + "\" class=\"line\" " +
+				"onclick=\"trainer.lineClick(" + lineId + ")\">* " +
+				exercises.get(cur) + "</div>");
 			exercises.remove(cur);
 
 			// if there are no more exercises to pick from... well, then let's pick fewer ones
