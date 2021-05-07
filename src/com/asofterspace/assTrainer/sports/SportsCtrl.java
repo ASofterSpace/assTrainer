@@ -48,6 +48,7 @@ public class SportsCtrl {
 			exercises.add("Plank Hold");
 			exercises.add("Plank Walk (move Elbows while keeping feet constant)");
 			exercises.add("Good Morning");
+			exercises.add("Arme ausstrecken und 3 Minuten ausgestreckt lassen (2 Sets, nicht 3)");
 		}
 
 		if (!"legs".equals(leaveout)) {
@@ -72,10 +73,10 @@ public class SportsCtrl {
 		exercises.add("Glute Bridge");
 		exercises.add("Wall Sit");
 		exercises.add("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)");
-		exercises.add("Tabletop Crunch");
+		exercises.add("Tabletop Crunch (lie on your back, legs as tabletop, and crunch towards the feet)");
 		exercises.add("Mountain Climbers");
 		exercises.add("Standwaage");
-		exercises.add("Arme ausstrecken und 3 Minuten ausgestreckt lassen (2 Sets, nicht 3)");
+		exercises.add("auf dem Rücken liegen und Fahrrad fahren");
 
 		return exercises;
 	}
@@ -95,10 +96,12 @@ public class SportsCtrl {
 			exercises.add("Horizontal Pullups: Unter Tisch liegen und hochziehen");
 			exercises.add("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
 			exercises.add("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
+			exercises.add("Jemensch an den Fußgelenken anheben und Schubkarre-mäßig rumwackeln");
 		}
 
 		if (!"legs".equals(leaveout)) {
 			exercises.add("Run Up and Down some Stairs");
+			exercises.add("Jemensch Huckepack nehmen und rumrennen");
 		}
 
 		return exercises;
