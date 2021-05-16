@@ -41,6 +41,7 @@ public class SportsCtrl {
 
 		if (!"arms".equals(leaveout)) {
 			exercises.add("Liegestütze / Pushups");
+			exercises.add("stufenweise Liegestütze / Pushups");
 			exercises.add("Inverted Pushups (down however you want, but up nicely)");
 			exercises.add("Pike Pushups (so pushups in pike position)");
 			exercises.add("Pike to Pushup (from pushup to pike position, back and forth)");
