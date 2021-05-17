@@ -59,7 +59,8 @@ window.trainer = {
 				return;
 			}
 			window.trainer.curTimerTime -= 1;
-			if (window.trainer.curTimerTime < 0) {
+			// show the done message for two seconds
+			if (window.trainer.curTimerTime < -1) {
 				window.trainer.stopTimer();
 			} else if (window.trainer.curTimerTime < 1) {
 				document.getElementById("timerTime").innerHTML = "Done!";
@@ -84,10 +85,20 @@ window.trainer = {
 	lineClick: function(lineId) {
 		var line = document.getElementById("line-" + lineId);
 		if (line) {
-			if (line.className == "line") {
-				line.className = "line done";
-			} else {
-				line.className = "line";
+			switch (line.className) {
+				case "line":
+					line.className = "line done1of3";
+					break;
+				case "line done1of3":
+					line.className = "line done2of3";
+					break;
+				case "line done2of3":
+					line.className = "line done";
+					break;
+				default:
+					line.className = "line";
+					break;
+
 			}
 		}
 	},

@@ -101,10 +101,22 @@ div.line > span {
 	vertical-align: top;
 }
 
+div.done1of3 {
+	color: #DB3;
+	padding-left: 4pt;
+}
+
+div.done2of3 {
+	color: #AD2;
+	padding-left: 8pt;
+	font-style: italic;
+}
+
 div.done {
 	color: #1E1;
+	padding-left: 12pt;
 	font-style: italic;
-	padding-left: 8pt;
+	font-weight: bold;
 }
 
 a.sidebar, div.sidebar, div.projectbar {

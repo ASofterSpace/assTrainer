@@ -83,7 +83,7 @@ public class SportsCtrl {
 	}
 
 	/**
-	 * Return main exercises that require gym equipment
+	 * Return main exercises that require special (e.g. gym) equipment or people
 	 */
 	public static List<String> getGymExercises(String leaveout) {
 
@@ -98,6 +98,7 @@ public class SportsCtrl {
 			exercises.add("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
 			exercises.add("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
 			exercises.add("Jemensch an den Fußgelenken anheben und Schubkarre-mäßig rumwackeln");
+			exercises.add("Handstand an der Wand");
 		}
 
 		if (!"legs".equals(leaveout)) {
