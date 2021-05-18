@@ -13,21 +13,21 @@ public class SportsCtrl {
 	/**
 	 * Return exercises that are useful for warming up
 	 */
-	public static List<String> getWarmupExercises(String leaveout) {
+	public static List<Exercise> getWarmupExercises(String leaveout) {
 
-		List<String> exercises = new ArrayList<>();
+		List<Exercise> exercises = new ArrayList<>();
 
 		if (!"legs".equals(leaveout)) {
-			exercises.add("Duck Walk");
+			exercises.add(new Exercise("Duck Walk", 1));
 		}
 
-		exercises.add("Hampelmensch");
-		exercises.add("Fußkreisen");
-		exercises.add("Zehen heranziehen");
-		exercises.add("Zombie Walk");
-		exercises.add("Arme vor und zurück schwingen");
-		exercises.add("Kniekreisen");
-		exercises.add("Ausfallschritt, dann die Füße so lassen und den Oberkörper von einer Seite zur anderen drehen, mit den Armen fröhlich mitschwingen, und zurück, und hin und her und so weiter :D");
+		exercises.add(new Exercise("Hampelmensch", 1));
+		exercises.add(new Exercise("Fußkreisen", 1));
+		exercises.add(new Exercise("Zehen heranziehen", 1));
+		exercises.add(new Exercise("Zombie Walk", 1));
+		exercises.add(new Exercise("Arme vor und zurück schwingen", 1));
+		exercises.add(new Exercise("Kniekreisen", 1));
+		exercises.add(new Exercise("Ausfallschritt, dann die Füße so lassen und den Oberkörper von einer Seite zur anderen drehen, mit den Armen fröhlich mitschwingen, und zurück, und hin und her und so weiter :D", 1));
 
 		return exercises;
 	}
@@ -35,49 +35,49 @@ public class SportsCtrl {
 	/**
 	 * Return the main exercises
 	 */
-	public static List<String> getMainExercises(String leaveout) {
+	public static List<Exercise> getMainExercises(String leaveout) {
 
-		List<String> exercises = new ArrayList<>();
+		List<Exercise> exercises = new ArrayList<>();
 
 		if (!"arms".equals(leaveout)) {
-			exercises.add("Liegestütze / Pushups");
-			exercises.add("stufenweise Liegestütze / Pushups");
-			exercises.add("Inverted Pushups (down however you want, but up nicely)");
-			exercises.add("Pike Pushups (so pushups in pike position)");
-			exercises.add("Pike to Pushup (from pushup to pike position, back and forth)");
-			exercises.add("Middle to Pushup to Middle to Sunseeker to Middle");
-			exercises.add("Plank Hold");
-			exercises.add("Plank Walk (move Elbows while keeping feet constant)");
-			exercises.add("Good Morning");
-			exercises.add("Arme ausstrecken und 3 Minuten ausgestreckt lassen (2 Sets, nicht 3)");
+			exercises.add(new Exercise("Liegestütze / Pushups", 3));
+			exercises.add(new Exercise("stufenweise Liegestütze / Pushups", 3));
+			exercises.add(new Exercise("Inverted Pushups (down however you want, but up nicely)", 3));
+			exercises.add(new Exercise("Pike Pushups (so pushups in pike position)", 3));
+			exercises.add(new Exercise("Pike to Pushup (from pushup to pike position, back and forth)", 3));
+			exercises.add(new Exercise("Middle to Pushup to Middle to Sunseeker to Middle", 3));
+			exercises.add(new Exercise("Plank Hold", 3));
+			exercises.add(new Exercise("Plank Walk (move Elbows while keeping feet constant)", 3));
+			exercises.add(new Exercise("Good Morning", 3));
+			exercises.add(new Exercise("Arme ausstrecken und 3 Minuten ausgestreckt lassen (einmal mit linker Handfläche oben, einmal mit rechter)", 2));
 		}
 
 		if (!"legs".equals(leaveout)) {
-			exercises.add("Jogging around the block");
-			exercises.add("Lunges");
-			exercises.add("Lunges mit erhöhtem hinteren Fuß");
-			exercises.add("Walking Lunges");
-			exercises.add("High-knee Run");
-			exercises.add("Squat");
-			exercises.add("Pistol Squat (squat on one leg only)");
-			exercises.add("Strecksprünge");
-			exercises.add("Sit down, reach for an object and stand up, sit down again and so on");
+			exercises.add(new Exercise("Jogging around the block", 1));
+			exercises.add(new Exercise("Lunges", 3));
+			exercises.add(new Exercise("Lunges mit erhöhtem hinteren Fuß", 3));
+			exercises.add(new Exercise("Walking Lunges", 3));
+			exercises.add(new Exercise("High-knee Run", 3));
+			exercises.add(new Exercise("Squats", 3));
+			exercises.add(new Exercise("Pistol Squats (squats on one leg only)", 3));
+			exercises.add(new Exercise("Strecksprünge", 3));
+			exercises.add(new Exercise("Sit down, reach for an object and stand up, sit down again and so on", 3));
 		}
 
 		if ((!"arms".equals(leaveout)) && (!"legs".equals(leaveout))) {
-			exercises.add("Burpees");
+			exercises.add(new Exercise("Burpees", 3));
 		}
 
-		exercises.add("Reverse Crunch (lie on your back, legs straight, and bring them up, and down, and up, and down...)");
-		exercises.add("Sunseeker");
-		exercises.add("Single-leg Hip Thrust");
-		exercises.add("Glute Bridge");
-		exercises.add("Wall Sit");
-		exercises.add("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)");
-		exercises.add("Tabletop Crunch (lie on your back, legs as tabletop, and crunch towards the feet)");
-		exercises.add("Mountain Climbers");
-		exercises.add("Standwaage");
-		exercises.add("auf dem Rücken liegen und Fahrrad fahren");
+		exercises.add(new Exercise("Reverse Crunch (lie on your back, legs straight, and bring them up, and down, and up, and down...)", 3));
+		exercises.add(new Exercise("Sunseeker", 3));
+		exercises.add(new Exercise("Single-leg Hip Thrust", 3));
+		exercises.add(new Exercise("Glute Bridge", 3));
+		exercises.add(new Exercise("Wall Sit", 3));
+		exercises.add(new Exercise("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)", 3));
+		exercises.add(new Exercise("Tabletop Crunch (lie on your back, legs as tabletop, and crunch towards the feet)", 3));
+		exercises.add(new Exercise("Mountain Climbers", 3));
+		exercises.add(new Exercise("Standwaage", 3));
+		exercises.add(new Exercise("auf dem Rücken liegen und Fahrrad fahren", 3));
 
 		return exercises;
 	}
@@ -85,25 +85,25 @@ public class SportsCtrl {
 	/**
 	 * Return main exercises that require special (e.g. gym) equipment or people
 	 */
-	public static List<String> getGymExercises(String leaveout) {
+	public static List<Exercise> getGymExercises(String leaveout) {
 
-		List<String> exercises = new ArrayList<>();
+		List<Exercise> exercises = new ArrayList<>();
 
 		if (!"arms".equals(leaveout)) {
-			exercises.add("Flat Dumbbell Press");
-			exercises.add("Kettlebell Power Snatch");
-			exercises.add("Dumbbell Triceps Overhead Extensions");
-			exercises.add("Dips");
-			exercises.add("Horizontal Pullups: Unter Tisch liegen und hochziehen");
-			exercises.add("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)");
-			exercises.add("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)");
-			exercises.add("Jemensch an den Fußgelenken anheben und Schubkarre-mäßig rumwackeln");
-			exercises.add("Handstand an der Wand");
+			exercises.add(new Exercise("Flat Dumbbell Press", 3));
+			exercises.add(new Exercise("Kettlebell Power Snatch", 1));
+			exercises.add(new Exercise("Dumbbell Triceps Overhead Extensions", 3));
+			exercises.add(new Exercise("Dips", 3));
+			exercises.add(new Exercise("Horizontal Pullups: Unter Tisch liegen und hochziehen", 3));
+			exercises.add(new Exercise("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)", 3));
+			exercises.add(new Exercise("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)", 3));
+			exercises.add(new Exercise("Jemensch an den Fußgelenken anheben und Schubkarre-mäßig rumwackeln", 1));
+			exercises.add(new Exercise("Handstand an der Wand", 3));
 		}
 
 		if (!"legs".equals(leaveout)) {
-			exercises.add("Run Up and Down some Stairs");
-			exercises.add("Jemensch Huckepack nehmen und rumrennen");
+			exercises.add(new Exercise("Run Up and Down some Stairs", 3));
+			exercises.add(new Exercise("Jemensch Huckepack nehmen und rumrennen", 1));
 		}
 
 		return exercises;

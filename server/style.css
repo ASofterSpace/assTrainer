@@ -106,13 +106,19 @@ div.done1of3 {
 	padding-left: 4pt;
 }
 
+div.done1of2 {
+	color: #BC3;
+	padding-left: 6pt;
+	font-style: italic;
+}
+
 div.done2of3 {
 	color: #AD2;
 	padding-left: 8pt;
 	font-style: italic;
 }
 
-div.done {
+div.done1of1, div.done2of2, div.done3of3 {
 	color: #1E1;
 	padding-left: 12pt;
 	font-style: italic;

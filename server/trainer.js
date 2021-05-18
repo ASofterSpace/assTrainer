@@ -84,23 +84,101 @@ window.trainer = {
 
 	lineClick: function(lineId) {
 		var line = document.getElementById("line-" + lineId);
+		var repeatNum = document.getElementById("line-" + lineId + "-repeat-num");
 		if (line) {
 			switch (line.className) {
-				case "line":
+				case "line done0of3":
 					line.className = "line done1of3";
+					repeatNum.innerHTML = "(1/3)";
 					break;
 				case "line done1of3":
 					line.className = "line done2of3";
+					repeatNum.innerHTML = "(2/3)";
 					break;
 				case "line done2of3":
-					line.className = "line done";
+					line.className = "line done3of3";
+					repeatNum.innerHTML = "(3/3)";
+					break;
+				case "line done3of3":
+					line.className = "line done0of3";
+					repeatNum.innerHTML = "(0/3)";
+					break;
+				case "line done0of2":
+					line.className = "line done1of2";
+					repeatNum.innerHTML = "(1/2)";
+					break;
+				case "line done1of2":
+					line.className = "line done2of2";
+					repeatNum.innerHTML = "(2/2)";
+					break;
+				case "line done2of2":
+					line.className = "line done0of2";
+					repeatNum.innerHTML = "(0/2)";
+					break;
+				case "line done0of1":
+					line.className = "line done1of1";
+					repeatNum.innerHTML = "(1/1)";
+					break;
+				case "line done1of1":
+					line.className = "line done0of1";
+					repeatNum.innerHTML = "(0/1)";
 					break;
 				default:
 					line.className = "line";
+					repeatNum.innerHTML = "(?/?)";
 					break;
-
 			}
 		}
+	},
+
+	lineRightClick: function(lineId) {
+		var line = document.getElementById("line-" + lineId);
+		var repeatNum = document.getElementById("line-" + lineId + "-repeat-num");
+		if (line) {
+			switch (line.className) {
+				case "line done0of3":
+					line.className = "line done3of3";
+					repeatNum.innerHTML = "(3/3)";
+					break;
+				case "line done1of3":
+					line.className = "line done0of3";
+					repeatNum.innerHTML = "(0/3)";
+					break;
+				case "line done2of3":
+					line.className = "line done1of3";
+					repeatNum.innerHTML = "(1/3)";
+					break;
+				case "line done3of3":
+					line.className = "line done2of3";
+					repeatNum.innerHTML = "(2/3)";
+					break;
+				case "line done0of2":
+					line.className = "line done2of2";
+					repeatNum.innerHTML = "(2/2)";
+					break;
+				case "line done1of2":
+					line.className = "line done0of2";
+					repeatNum.innerHTML = "(0/2)";
+					break;
+				case "line done2of2":
+					line.className = "line done1of2";
+					repeatNum.innerHTML = "(1/2)";
+					break;
+				case "line done0of1":
+					line.className = "line done1of1";
+					repeatNum.innerHTML = "(1/1)";
+					break;
+				case "line done1of1":
+					line.className = "line done0of1";
+					repeatNum.innerHTML = "(0/1)";
+					break;
+				default:
+					line.className = "line";
+					repeatNum.innerHTML = "(?/?)";
+					break;
+			}
+		}
+		return false;
 	},
 
 }

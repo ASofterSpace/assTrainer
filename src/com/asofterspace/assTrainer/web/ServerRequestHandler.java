@@ -5,6 +5,7 @@
 package com.asofterspace.assTrainer.web;
 
 import com.asofterspace.assTrainer.Database;
+import com.asofterspace.assTrainer.sports.Exercise;
 import com.asofterspace.assTrainer.sports.SportsCtrl;
 import com.asofterspace.toolbox.io.Directory;
 import com.asofterspace.toolbox.io.File;
@@ -152,7 +153,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			exHtml.append("<div>");
 			exHtml.append("<div>For the warmup, how about these:</div>");
 
-			List<String> exercises = SportsCtrl.getWarmupExercises(leaveout);
+			List<Exercise> exercises = SportsCtrl.getWarmupExercises(leaveout);
 			addExercisesToHtml(exHtml, exercises, 4);
 			exHtml.append("</div>");
 
@@ -179,15 +180,19 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		return null;
 	}
 
-	private void addExercisesToHtml(StringBuilder exHtml, List<String> exercises, int howMany) {
+	private void addExercisesToHtml(StringBuilder exHtml, List<Exercise> exercises, int howMany) {
 
 		for (int i = 0; i < howMany; i++) {
 
 			int cur = rand.nextInt(exercises.size());
+			Exercise ex = exercises.get(cur);
 			lineId++;
-			exHtml.append("<div id=\"line-" + lineId + "\" class=\"line\" " +
-				"onclick=\"trainer.lineClick(" + lineId + ")\">* " +
-				exercises.get(cur) + "</div>");
+			exHtml.append("<div id=\"line-" + lineId + "\" class=\"" + ex.getClassName() + "\" " +
+				"onclick=\"trainer.lineClick(" + lineId + ");\" " +
+				"oncontextmenu=\"return trainer.lineRightClick(" + lineId + ");\">" +
+				"* " + ex.toString() +
+				" <span id=\"line-" + lineId + "-repeat-num\">(0/" + ex.getRepeats() + ")</span>" +
+				"</div>");
 			exercises.remove(cur);
 
 			// if there are no more exercises to pick from... well, then let's pick fewer ones
