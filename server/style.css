@@ -140,6 +140,10 @@ a.sidebar > img.avatar, div.sidebar > img.avatar {
 	top: 0;
 }
 
+img.avatar:hover {
+	filter: brightness(135%);
+}
+
 div.footer {
 	height: 200pt;
 }
