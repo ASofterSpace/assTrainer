@@ -74,7 +74,7 @@ public class SportsCtrl {
 		exercises.add(new Exercise("Single-leg Hip Thrust", 3));
 		exercises.add(new Exercise("Glute Bridge", 3));
 		exercises.add(new Exercise("Wall Sit", 3));
-		exercises.add(new Exercise("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)", 3));
+		exercises.add(new Exercise("Schiffchen (versuchen, in möglichst vielen Winkeln stabil zu sein, und von einem Winkel zum nächsten flüssig hoch und runter zu kommen)", 2));
 		exercises.add(new Exercise("Tabletop Crunch (lie on your back, legs as tabletop, and crunch towards the feet)", 3));
 		exercises.add(new Exercise("Mountain Climbers", 3));
 		exercises.add(new Exercise("Standwaage", 3));
