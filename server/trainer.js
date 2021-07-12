@@ -83,6 +83,11 @@ window.trainer = {
 	},
 
 	lineClick: function(lineId) {
+
+		if (this.trainingStartTime == null) {
+			this.startTraining();
+		}
+
 		var line = document.getElementById("line-" + lineId);
 		var repeatNum = document.getElementById("line-" + lineId + "-repeat-num");
 		if (line) {
