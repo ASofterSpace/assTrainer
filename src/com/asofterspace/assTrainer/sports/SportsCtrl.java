@@ -22,6 +22,7 @@ public class SportsCtrl {
 		}
 
 		exercises.add(new Exercise("Hampelmensch", 1));
+		exercises.add(new Exercise("Rücken-Raupe an der Wand", 1));
 		exercises.add(new Exercise("Fußkreisen", 1));
 		exercises.add(new Exercise("Zehen heranziehen", 1));
 		exercises.add(new Exercise("Zombie Walk", 1));
