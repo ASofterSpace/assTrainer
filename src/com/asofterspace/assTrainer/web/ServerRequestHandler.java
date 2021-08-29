@@ -5,6 +5,9 @@
 package com.asofterspace.assTrainer.web;
 
 import com.asofterspace.assTrainer.Database;
+import com.asofterspace.assTrainer.facts.Answer;
+import com.asofterspace.assTrainer.facts.FactsCtrl;
+import com.asofterspace.assTrainer.facts.Question;
 import com.asofterspace.assTrainer.sports.Exercise;
 import com.asofterspace.assTrainer.sports.SportsCtrl;
 import com.asofterspace.toolbox.io.Directory;
@@ -78,35 +81,41 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 		WebServerAnswer answer = new WebServerAnswerInJson("{\"success\": true}");
 
-		try {
+		switch (fileLocation) {
 
-			switch (fileLocation) {
+			case "/answered":
+				String findId = json.getString("id");
+				String answeredHowWell = json.getString("answeredHowWell");
+				Question oldQ = FactsCtrl.getQuestionById(findId);
+				oldQ.answer(answeredHowWell);
+				database.save();
+				answer = respondWithQuestion();
+				break;
 
-				case "/todo":
-					answer = new WebServerAnswerInJson(new JSON("{\"success\": maybe}"));
-					break;
-/*
-				case "/addSingleTask":
+			case "/restartSession":
+				FactsCtrl.restartSession();
+				answer = respondWithQuestion();
+				break;
 
-					Task addedOrEditedTask = addOrEditSingleTask(json);
-					if (addedOrEditedTask == null) {
-						return;
-					}
-					answer = new WebServerAnswerInJson(new JSON("{\"success\": true}"));
-					break;
-*/
-
-				default:
-					respond(404);
-					return;
-			}
-
-		} catch (JsonParseException e) {
-			respond(403);
-			return;
+			default:
+				respond(404);
+				return;
 		}
 
 		respond(200, answer);
+	}
+
+	private WebServerAnswer respondWithQuestion() {
+
+		JSON res = new JSON();
+		res.set("success", true);
+
+		Question newQ = FactsCtrl.getNextQuestion();
+		res.set("questionHtml", newQ.toHtml());
+		res.set("answerHtml", newQ.getAnswer().toHtml());
+		res.set("questionId", newQ.getId());
+
+		return new WebServerAnswerInJson(res);
 	}
 
 	@Override
@@ -174,6 +183,32 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[SPORTS_EXERCISE]]", exHtml.toString());
 
+			indexContent = addTabsHtml(indexContent, "index.htm");
+
+			return new WebServerAnswerInHtml(indexContent);
+		}
+
+		if (location.startsWith("/facts.htm")) {
+
+			TextFile indexBaseFile = new TextFile(webRoot, "facts.htm");
+			String indexContent = indexBaseFile.getContent();
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
+				SideBarCtrl.getSidebarHtmlStr(new SideBarEntryForEmployee("Zara")));
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[USERNAME]]", database.getUsername());
+
+			Question q = FactsCtrl.getNextQuestion();
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION]]", q.toHtml());
+			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION_ID]]", q.getId());
+
+			Answer a = q.getAnswer();
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[ANSWER]]", a.toHtml());
+
+			indexContent = addTabsHtml(indexContent, "facts.htm");
+
 			return new WebServerAnswerInHtml(indexContent);
 		}
 
@@ -201,6 +236,31 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				return;
 			}
 		}
+	}
+
+	private String addTabsHtml(String html, String currentTab) {
+
+		String tabsHtml = "";
+
+		tabsHtml += "<div id='tabList'>";
+
+		tabsHtml += "<a href='/index.htm'";
+		if (currentTab.equals("index.htm")) {
+			tabsHtml += " class='selectedTab'";
+		}
+		tabsHtml += ">&nbsp;Sports Training</a>";
+
+		tabsHtml += "<a href='/facts.htm'";
+		if (currentTab.equals("facts.htm")) {
+			tabsHtml += " class='selectedTab'";
+		}
+		tabsHtml += ">&nbsp;Facts Training</a>";
+
+		tabsHtml += "</div>";
+
+		html = StrUtils.replaceAll(html, "[[TABS]]", tabsHtml);
+
+		return html;
 	}
 
 	@Override

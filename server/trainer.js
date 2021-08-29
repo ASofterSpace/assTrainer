@@ -28,6 +28,19 @@ window.trainer = {
 			retry = true;
 		}
 
+		var tabList = document.getElementById("tabList");
+		var avatar = document.getElementById("zaraAvatar");
+		if (tabList && avatar) {
+			var topPx = avatar.clientHeight + 25;
+			tabList.style.top = topPx + "px";
+			tabList.style.height = (window.innerHeight - (topPx + 25)) + "px";
+			if (avatar.clientHeight < 1) {
+				retry = true;
+			}
+		} else {
+			retry = true;
+		}
+
 		if (retry) {
 			// if we could not fully resize now, then let's do it later...
 			window.setTimeout(function() {
@@ -184,6 +197,64 @@ window.trainer = {
 			}
 		}
 		return false;
+	},
+
+	loadQuestion: function(data) {
+		var questionDiv = document.getElementById("question_div");
+		var answerDiv = document.getElementById("answer_div");
+		answerDiv.style.display = "none";
+		questionDiv.innerHTML = data.questionHtml;
+		answerDiv.innerHTML = data.answerHtml;
+		window.curQuestion = data.questionId;
+	},
+
+	showAnswer: function() {
+		var answerDiv = document.getElementById("answer_div");
+		answerDiv.style.display = "block";
+	},
+
+	answered: function(answeredHowWell) {
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "answered", true);
+		request.setRequestHeader("Content-Type", "application/json");
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				var result = JSON.parse(request.response);
+				if (result.success) {
+					window.trainer.loadQuestion(result);
+				}
+			}
+		}
+
+		var data = {
+			id: window.curQuestion,
+			answeredHowWell: answeredHowWell,
+		};
+
+		request.send(JSON.stringify(data));
+	},
+
+	restartSession: function() {
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "restartSession", true);
+		request.setRequestHeader("Content-Type", "application/json");
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				var result = JSON.parse(request.response);
+				if (result.success) {
+					window.trainer.loadQuestion(result);
+				}
+			}
+		}
+
+		var data = {
+		};
+
+		request.send(JSON.stringify(data));
 	},
 
 }

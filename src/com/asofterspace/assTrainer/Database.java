@@ -4,10 +4,15 @@
  */
 package com.asofterspace.assTrainer;
 
+import com.asofterspace.assTrainer.facts.FactsCtrl;
+import com.asofterspace.assTrainer.facts.Question;
 import com.asofterspace.toolbox.io.JSON;
 import com.asofterspace.toolbox.io.JsonFile;
 import com.asofterspace.toolbox.io.JsonParseException;
 import com.asofterspace.toolbox.utils.Record;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Database {
@@ -15,6 +20,8 @@ public class Database {
 	private final static String USERNAME = "username";
 
 	private final static String PORT = "port";
+
+	private final static String QUESTIONS = "questions";
 
 	private JsonFile dbFile;
 
@@ -40,6 +47,12 @@ public class Database {
 		this.port = root.getInteger(PORT);
 
 		this.username = root.getString(USERNAME);
+
+		List<Question> questions = new ArrayList<>();
+		for (Record qrec : root.getValues(QUESTIONS)) {
+			questions.add(new Question(qrec));
+		}
+		FactsCtrl.setQuestions(questions);
 	}
 
 	public Record getRoot() {
@@ -53,6 +66,12 @@ public class Database {
 		root.set(PORT, port);
 
 		root.set(USERNAME, username);
+
+		List<Record> questionRecs = new ArrayList<>();
+		for (Question q : FactsCtrl.getQuestions()) {
+			questionRecs.add(q.toRecord());
+		}
+		root.set(QUESTIONS, questionRecs);
 
 		dbFile.setAllContents(root);
 		dbFile.save();

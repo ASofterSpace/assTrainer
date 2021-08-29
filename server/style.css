@@ -37,6 +37,39 @@ img.avatar {
 	border-radius: 20pt;
 }
 
+div#tabList {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+div#tabList {
+	scrollbar-color: #402 #102;
+}
+
+div#tabList {
+	overflow-x: scroll;
+}
+
+div#tabList > a {
+	white-space: nowrap;
+}
+
+div#tabList > div, div#tabList > a {
+	margin-right: 8pt;
+	display: block;
+	text-decoration: none;
+	color: #88AAFF;
+	border-radius: 6pt;
+}
+
+div#tabList > a:hover {
+	background: rgba(255, 0, 255, 0.1);
+}
+
+div#tabList > a.selectedTab {
+	background: rgba(255, 0, 255, 0.25);
+}
+
 div#mainContent {
 	overflow-y: scroll;
 	overflow-x: hidden;

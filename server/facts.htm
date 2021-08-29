@@ -1,0 +1,37 @@
+		@include(inc_common_start.htm)
+
+		<div id="mainContent">
+			<div style="padding-top: 10pt;">
+				Hey [[USERNAME]] - how about learning some facts? ;)
+			</div>
+
+			<div style="position: absolute;top: 5pt;right: 5pt;">
+				<span class="button" onclick="trainer.restartSession()">Restart the Session</span>
+			</div>
+
+			<script>
+				window.curQuestion = "[[QUESTION_ID]]";
+			</script>
+
+			<div id='question_div'>
+				[[QUESTION]]
+			</div>
+
+			<div>
+				<span class="button" onclick="trainer.showAnswer()">Show Answer</span>
+			</div>
+
+			<div id='answer_div' style='display: none;'>
+				[[ANSWER]]
+			</div>
+
+			<div>
+				<span class="button" onclick="trainer.answered('easy')">Super Easy, Barely an Inconvenience!</span>
+				<span class="button" onclick="trainer.answered('hard')">Hard - But Got It</span>
+				<span class="button" onclick="trainer.answered('close')">Close...</span>
+				<span class="button" onclick="trainer.answered('wrong')">Wrong</span>
+				<span class="button" onclick="trainer.answered('critfail')">Critical Fail!</span>
+			</div>
+		</div>
+
+		@include(inc_common_end.htm)
