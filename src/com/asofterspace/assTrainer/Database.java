@@ -33,6 +33,10 @@ public class Database {
 
 
 	public Database() {
+		reload();
+	}
+
+	public void reload() {
 
 		this.dbFile = new JsonFile("config/database.json");
 		this.dbFile.createParentDirectory();

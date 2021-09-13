@@ -29,6 +29,7 @@ public class SportsCtrl {
 		exercises.add(new Exercise("Arme vor und zurück schwingen", 1));
 		exercises.add(new Exercise("Kniekreisen", 1));
 		exercises.add(new Exercise("Ausfallschritt, dann die Füße so lassen und den Oberkörper von einer Seite zur anderen drehen, mit den Armen fröhlich mitschwingen, und zurück, und hin und her und so weiter :D", 1));
+		exercises.add(new Exercise("Hände zusammenpressen, loslassen, zusammenpressen, loslassen, und dabei die Arme langsam über den Kopf heben und wieder herunterlassen", 1));
 
 		return exercises;
 	}

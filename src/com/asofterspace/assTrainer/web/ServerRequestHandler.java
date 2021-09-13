@@ -97,6 +97,11 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				answer = respondWithQuestion();
 				break;
 
+			case "/reloadDatabase":
+				database.reload();
+				answer = respondWithQuestion();
+				break;
+
 			default:
 				respond(404);
 				return;
@@ -114,6 +119,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		res.set("questionHtml", newQ.toHtml());
 		res.set("answerHtml", newQ.getAnswer().toHtml());
 		res.set("questionId", newQ.getId());
+		res.set("timeSinceAnswer", newQ.getTimeSinceAnswer());
 
 		return new WebServerAnswerInJson(res);
 	}
@@ -188,6 +194,34 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			return new WebServerAnswerInHtml(indexContent);
 		}
 
+		if (location.startsWith("/all_exercises.htm")) {
+
+			TextFile indexBaseFile = new TextFile(webRoot, "all_exercises.htm");
+			String indexContent = indexBaseFile.getContent();
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
+				SideBarCtrl.getSidebarHtmlStr(new SideBarEntryForEmployee("Zara")));
+
+			StringBuilder warmupHtml = new StringBuilder();
+			String leaveout = null;
+			List<Exercise> exercises = SportsCtrl.getWarmupExercises(leaveout);
+			for (Exercise exercise : exercises) {
+				appendExerciseToHtml(exercise, warmupHtml);
+			}
+			indexContent = StrUtils.replaceAll(indexContent, "[[WARMUP_EXERCISES]]", warmupHtml.toString());
+
+			StringBuilder exHtml = new StringBuilder();
+			exercises = SportsCtrl.getMainExercises(leaveout);
+			for (Exercise exercise : exercises) {
+				appendExerciseToHtml(exercise, exHtml);
+			}
+			indexContent = StrUtils.replaceAll(indexContent, "[[EXERCISES]]", exHtml.toString());
+
+			indexContent = addTabsHtml(indexContent, "all_exercises.htm");
+
+			return new WebServerAnswerInHtml(indexContent);
+		}
+
 		if (location.startsWith("/facts.htm")) {
 
 			TextFile indexBaseFile = new TextFile(webRoot, "facts.htm");
@@ -202,12 +236,50 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION]]", q.toHtml());
 			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION_ID]]", q.getId());
+			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION_TIME_SINCE_ANSWER]]",
+				""+q.getTimeSinceAnswer());
 
 			Answer a = q.getAnswer();
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[ANSWER]]", a.toHtml());
 
 			indexContent = addTabsHtml(indexContent, "facts.htm");
+
+			return new WebServerAnswerInHtml(indexContent);
+		}
+
+		if (location.startsWith("/all_facts.htm")) {
+
+			TextFile indexBaseFile = new TextFile(webRoot, "all_facts.htm");
+			String indexContent = indexBaseFile.getContent();
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[SIDEBAR]]",
+				SideBarCtrl.getSidebarHtmlStr(new SideBarEntryForEmployee("Zara")));
+
+			StringBuilder factsHtml = new StringBuilder();
+			List<Question> questions = FactsCtrl.getQuestions();
+			for (Question q : questions) {
+
+				factsHtml.append("<div class='line'>");
+
+				factsHtml.append("<div>");
+				factsHtml.append(q.toHtml());
+				factsHtml.append("</div>\n");
+
+				factsHtml.append("<div>");
+				factsHtml.append("<span class='button' onclick='trainer.showAnswer(\"" + q.getId() + "\")'>");
+				factsHtml.append("Show Answer</span>");
+				factsHtml.append("</div>\n");
+
+				factsHtml.append("<div id='answer_div_" + q.getId() + "' style='display: none;'>");
+				factsHtml.append(q.getAnswer().toHtml());
+				factsHtml.append("</div>\n");
+
+				factsHtml.append("</div>\n");
+			}
+			indexContent = StrUtils.replaceAll(indexContent, "[[FACTS]]", factsHtml.toString());
+
+			indexContent = addTabsHtml(indexContent, "all_facts.htm");
 
 			return new WebServerAnswerInHtml(indexContent);
 		}
@@ -250,11 +322,23 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		}
 		tabsHtml += ">&nbsp;Sports Training</a>";
 
+		tabsHtml += "<a href='/all_exercises.htm'";
+		if (currentTab.equals("all_exercises.htm")) {
+			tabsHtml += " class='selectedTab'";
+		}
+		tabsHtml += ">&nbsp;All Exercises List</a>";
+
 		tabsHtml += "<a href='/facts.htm'";
 		if (currentTab.equals("facts.htm")) {
 			tabsHtml += " class='selectedTab'";
 		}
 		tabsHtml += ">&nbsp;Facts Training</a>";
+
+		tabsHtml += "<a href='/all_facts.htm'";
+		if (currentTab.equals("all_facts.htm")) {
+			tabsHtml += " class='selectedTab'";
+		}
+		tabsHtml += ">&nbsp;All Facts List</a>";
 
 		tabsHtml += "</div>";
 
@@ -296,6 +380,20 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		// if the file was not found on the whitelist, do not return it
 		// - even if it exists on the server!
 		return null;
+	}
+
+	private void appendExerciseToHtml(Exercise exercise, StringBuilder html) {
+
+		html.append("<div class='line'>");
+		html.append(exercise.getName());
+		html.append(" (repeated ");
+		if (exercise.getRepeats() == 1) {
+			html.append("once");
+		} else {
+			html.append(exercise.getRepeats() + " times");
+		}
+		html.append(")");
+		html.append("</div>");
 	}
 
 }

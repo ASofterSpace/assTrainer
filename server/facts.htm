@@ -9,6 +9,10 @@
 				<span class="button" onclick="trainer.restartSession()">Restart the Session</span>
 			</div>
 
+			<div style="position: absolute;top: 5pt;right: 115pt;">
+				<span class="button" onclick="trainer.reloadDatabase()">Reload Database</span>
+			</div>
+
 			<script>
 				window.curQuestion = "[[QUESTION_ID]]";
 			</script>
@@ -23,6 +27,11 @@
 
 			<div id='answer_div' style='display: none;'>
 				[[ANSWER]]
+			</div>
+
+			<div id='metadata_div'>
+				Time since last answering this question:
+				<span id='timeSinceAnswer_span'>[[QUESTION_TIME_SINCE_ANSWER]]</span> seasons
 			</div>
 
 			<div>

@@ -206,11 +206,25 @@ window.trainer = {
 		questionDiv.innerHTML = data.questionHtml;
 		answerDiv.innerHTML = data.answerHtml;
 		window.curQuestion = data.questionId;
+		document.getElementById('timeSinceAnswer_span').innerHTML = ""+data.timeSinceAnswer;
 	},
 
-	showAnswer: function() {
+	showAnswer: function(questionId) {
+
+		// if no questionId is given, just use the one main answer div
 		var answerDiv = document.getElementById("answer_div");
-		answerDiv.style.display = "block";
+
+		// if a questionId is given, show that particular answer
+		if (questionId) {
+			answerDiv = document.getElementById("answer_div_" + questionId);
+		}
+
+		// show or hide
+		if (answerDiv.style.display == "block") {
+			answerDiv.style.display = "none";
+		} else {
+			answerDiv.style.display = "block";
+		}
 	},
 
 	answered: function(answeredHowWell) {
@@ -240,6 +254,27 @@ window.trainer = {
 
 		var request = new XMLHttpRequest();
 		request.open("POST", "restartSession", true);
+		request.setRequestHeader("Content-Type", "application/json");
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				var result = JSON.parse(request.response);
+				if (result.success) {
+					window.trainer.loadQuestion(result);
+				}
+			}
+		}
+
+		var data = {
+		};
+
+		request.send(JSON.stringify(data));
+	},
+
+	reloadDatabase: function() {
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "reloadDatabase", true);
 		request.setRequestHeader("Content-Type", "application/json");
 
 		request.onreadystatechange = function() {
