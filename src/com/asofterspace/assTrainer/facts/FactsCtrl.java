@@ -21,11 +21,7 @@ public class FactsCtrl {
 	public static Question getNextQuestion() {
 
 		// sort the questions by priority
-		Collections.sort(questions, new Comparator<Question>() {
-			public int compare(Question a, Question b) {
-				return b.getPriority() - a.getPriority();
-			}
-		});
+		sortByPriority();
 
 		// get the one with the highest priority that has not already been answered in this session
 		for (int i = 0; i < questions.size(); i++) {
@@ -37,6 +33,39 @@ public class FactsCtrl {
 		// all have been answerd? restart from the top!
 		restartSession();
 		return getNextQuestion();
+	}
+
+	/**
+	 * sort the questions by priority
+	 */
+	public static void sortByPriority() {
+		Collections.sort(questions, new Comparator<Question>() {
+			public int compare(Question a, Question b) {
+				return b.getPriority() - a.getPriority();
+			}
+		});
+	}
+
+	/**
+	 * sort the questions by what time they are referring to
+	 */
+	public static void sortByWhen() {
+		Collections.sort(questions, new Comparator<Question>() {
+			public int compare(Question a, Question b) {
+				if (a.getWhen() == null) {
+					if (b.getWhen() == null) {
+						return b.getPriority() - a.getPriority();
+					} else {
+						return 1;
+					}
+				} else {
+					if (b.getWhen() == null) {
+						return -1;
+					}
+				}
+				return b.getWhen() - a.getWhen();
+			}
+		});
 	}
 
 	public static Question getQuestionById(String id) {

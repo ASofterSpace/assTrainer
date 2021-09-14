@@ -19,6 +19,7 @@ public class Question {
 	private static final String TIME_SINCE_ANSWER = "timeSinceAnswer";
 	private static final String TEXT = "question";
 	private static final String TAG = "tag";
+	private static final String WHEN = "when";
 
 	private final static int UUID_LENGTH = UUID.randomUUID().toString().length();
 
@@ -31,6 +32,8 @@ public class Question {
 	private int timeSinceAnswer;
 
 	private String tag;
+
+	private Integer when;
 
 	private boolean answeredNow = false;
 
@@ -47,6 +50,7 @@ public class Question {
 		// on every load, increase by one
 		this.timeSinceAnswer = rec.getInteger(TIME_SINCE_ANSWER, 0) + 1;
 		this.tag = rec.getString(TAG);
+		this.when = rec.getInteger(WHEN);
 		this.answer = new Answer(rec.getString(ANSWER), this);
 	}
 
@@ -104,12 +108,17 @@ public class Question {
 		result.set(PRIORITY, priority);
 		result.set(TIME_SINCE_ANSWER, timeSinceAnswer);
 		result.set(TAG, tag);
+		result.set(WHEN, when);
 		result.set(ANSWER, answer.getText());
 		return result;
 	}
 
 	public int getTimeSinceAnswer() {
 		return timeSinceAnswer;
+	}
+
+	public Integer getWhen() {
+		return when;
 	}
 
 	public String toHtml() {

@@ -257,6 +257,22 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				SideBarCtrl.getSidebarHtmlStr(new SideBarEntryForEmployee("Zara")));
 
 			StringBuilder factsHtml = new StringBuilder();
+
+			String sortBy = arguments.get("sortby");
+			String sortbyOther;
+
+			if (sortBy == null) {
+				sortBy = "When";
+			}
+
+			if (sortBy.equals("When")) {
+				FactsCtrl.sortByWhen();
+				sortbyOther = "Priority";
+			} else {
+				FactsCtrl.sortByPriority();
+				sortbyOther = "When";
+			}
+
 			List<Question> questions = FactsCtrl.getQuestions();
 			for (Question q : questions) {
 
@@ -278,6 +294,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				factsHtml.append("</div>\n");
 			}
 			indexContent = StrUtils.replaceAll(indexContent, "[[FACTS]]", factsHtml.toString());
+
+			indexContent = StrUtils.replaceAll(indexContent, "[[SORTBY_LABEL]]", sortbyOther);
 
 			indexContent = addTabsHtml(indexContent, "all_facts.htm");
 
