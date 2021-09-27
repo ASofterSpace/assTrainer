@@ -250,6 +250,27 @@ window.trainer = {
 		request.send(JSON.stringify(data));
 	},
 
+	randomFact: function(answeredHowWell) {
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "randomFact", true);
+		request.setRequestHeader("Content-Type", "application/json");
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				var result = JSON.parse(request.response);
+				if (result.success) {
+					window.trainer.loadQuestion(result);
+				}
+			}
+		}
+
+		var data = {
+		};
+
+		request.send(JSON.stringify(data));
+	},
+
 	restartSession: function() {
 
 		var request = new XMLHttpRequest();

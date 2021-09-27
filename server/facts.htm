@@ -1,8 +1,8 @@
 		@include(inc_common_start.htm)
 
 		<div id="mainContent">
-			<div style="padding-top: 10pt;">
-				Hey [[USERNAME]] - how about learning some facts? ;)
+			<div style="padding-top: 10pt; text-align: center;">
+				[[CALL_TO_ACTION]]
 			</div>
 
 			<div style="position: absolute;top: 5pt;right: 5pt;">
@@ -11,6 +11,10 @@
 
 			<div style="position: absolute;top: 5pt;right: 115pt;">
 				<span class="button" onclick="trainer.reloadDatabase()">Reload Database</span>
+			</div>
+
+			<div style="position: absolute;top: 5pt;right: 214pt;">
+				<span class="button" onclick="trainer.randomFact()">Random Fact</span>
 			</div>
 
 			<script>

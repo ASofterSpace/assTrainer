@@ -16,6 +16,7 @@ import com.asofterspace.toolbox.io.JSON;
 import com.asofterspace.toolbox.io.JsonParseException;
 import com.asofterspace.toolbox.io.TextFile;
 import com.asofterspace.toolbox.utils.StrUtils;
+import com.asofterspace.toolbox.Utils;
 import com.asofterspace.toolbox.virtualEmployees.SideBarCtrl;
 import com.asofterspace.toolbox.virtualEmployees.SideBarEntry;
 import com.asofterspace.toolbox.virtualEmployees.SideBarEntryForEmployee;
@@ -80,6 +81,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		}
 
 		WebServerAnswer answer = new WebServerAnswerInJson("{\"success\": true}");
+		boolean randomQuestion = false;
 
 		switch (fileLocation) {
 
@@ -89,17 +91,22 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				Question oldQ = FactsCtrl.getQuestionById(findId);
 				oldQ.answer(answeredHowWell);
 				database.save();
-				answer = respondWithQuestion();
+				answer = respondWithQuestion(randomQuestion);
 				break;
 
 			case "/restartSession":
 				FactsCtrl.restartSession();
-				answer = respondWithQuestion();
+				answer = respondWithQuestion(randomQuestion);
 				break;
 
 			case "/reloadDatabase":
 				database.reload();
-				answer = respondWithQuestion();
+				answer = respondWithQuestion(randomQuestion);
+				break;
+
+			case "/randomFact":
+				randomQuestion = true;
+				answer = respondWithQuestion(randomQuestion);
 				break;
 
 			default:
@@ -110,12 +117,15 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		respond(200, answer);
 	}
 
-	private WebServerAnswer respondWithQuestion() {
+	private WebServerAnswer respondWithQuestion(boolean randomQuestion) {
 
 		JSON res = new JSON();
 		res.set("success", true);
 
 		Question newQ = FactsCtrl.getNextQuestion();
+		if (randomQuestion) {
+			newQ = FactsCtrl.getRandomQuestion();
+		}
 		res.set("questionHtml", newQ.toHtml());
 		res.set("answerHtml", newQ.getAnswer().toHtml());
 		res.set("questionId", newQ.getId());
@@ -243,6 +253,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[ANSWER]]", a.toHtml());
 
+			indexContent = addCallToAction(indexContent);
+
 			indexContent = addTabsHtml(indexContent, "facts.htm");
 
 			return new WebServerAnswerInHtml(indexContent);
@@ -296,6 +308,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 			indexContent = StrUtils.replaceAll(indexContent, "[[FACTS]]", factsHtml.toString());
 
 			indexContent = StrUtils.replaceAll(indexContent, "[[SORTBY_LABEL]]", sortbyOther);
+
+			indexContent = addCallToAction(indexContent);
 
 			indexContent = addTabsHtml(indexContent, "all_facts.htm");
 
@@ -412,6 +426,26 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		}
 		html.append(")");
 		html.append("</div>");
+	}
+
+	private String addCallToAction(String html) {
+
+		int cur = rand.nextInt(3);
+
+		String call = "Growth is uncomfortable! So what are we going to feel? And what are we going to do?";
+
+		switch (cur) {
+			case 1:
+				call = "NO MORE FUCKING EXCUSES";
+				break;
+			case 2:
+				call = "LIBERTY OR DEATH";
+				break;
+		}
+
+		html = StrUtils.replaceAll(html, "[[CALL_TO_ACTION]]", call);
+
+		return html;
 	}
 
 }

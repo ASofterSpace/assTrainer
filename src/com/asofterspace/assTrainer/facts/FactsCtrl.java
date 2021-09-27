@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 
 public class FactsCtrl {
 
 	private static List<Question> questions = new ArrayList<>();
+
+	private static Random rand = null;
 
 
 	/**
@@ -33,6 +36,32 @@ public class FactsCtrl {
 		// all have been answerd? restart from the top!
 		restartSession();
 		return getNextQuestion();
+	}
+
+	/**
+	 * Return the any question
+	 */
+	public static Question getRandomQuestion() {
+
+		if (rand == null) {
+			rand = new Random();
+		}
+
+		List<Question> unansweredOnes = new ArrayList<>();
+
+		for (int i = 0; i < questions.size(); i++) {
+			if (!questions.get(i).getAnsweredNow()) {
+				unansweredOnes.add(questions.get(i));
+			}
+		}
+
+		if (unansweredOnes.size() > 0) {
+			return unansweredOnes.get(rand.nextInt(unansweredOnes.size()));
+		}
+
+		// all have been answerd? restart from the top!
+		restartSession();
+		return getRandomQuestion();
 	}
 
 	/**
