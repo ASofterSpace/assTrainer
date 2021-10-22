@@ -432,7 +432,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 		int cur = rand.nextInt(3);
 
-		String call = "Growth is uncomfortable! So what are we going to feel? And what are we going to do?";
+		String call = "Growth is uncomfortable!<br>So what are we going to feel? And what are we going to do?";
 
 		switch (cur) {
 			case 1:
