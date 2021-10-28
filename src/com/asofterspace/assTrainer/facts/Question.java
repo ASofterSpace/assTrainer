@@ -20,6 +20,7 @@ public class Question {
 	private static final String TEXT = "question";
 	private static final String TAG = "tag";
 	private static final String WHEN = "when";
+	private static final String HUGO = "hugo";
 
 	private final static int UUID_LENGTH = UUID.randomUUID().toString().length();
 
@@ -34,6 +35,8 @@ public class Question {
 	private String tag;
 
 	private Integer when;
+
+	private Boolean hugo;
 
 	private boolean answeredNow = false;
 
@@ -51,6 +54,7 @@ public class Question {
 		this.timeSinceAnswer = rec.getInteger(TIME_SINCE_ANSWER, 0) + 1;
 		this.tag = rec.getString(TAG);
 		this.when = rec.getInteger(WHEN);
+		this.hugo = rec.getBoolean(HUGO);
 		this.answer = new Answer(rec.getString(ANSWER), this);
 	}
 
@@ -101,6 +105,13 @@ public class Question {
 		this.answeredNow = answeredNow;
 	}
 
+	public boolean getHugo() {
+		if (hugo == null) {
+			hugo = false;
+		}
+		return hugo;
+	}
+
 	public Record toRecord() {
 		Record result = new Record();
 		result.set(TEXT, text);
@@ -109,6 +120,7 @@ public class Question {
 		result.set(TIME_SINCE_ANSWER, timeSinceAnswer);
 		result.set(TAG, tag);
 		result.set(WHEN, when);
+		result.set(HUGO, getHugo());
 		result.set(ANSWER, answer.getText());
 		return result;
 	}
