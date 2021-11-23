@@ -376,6 +376,8 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 		html = StrUtils.replaceAll(html, "[[TABS]]", tabsHtml);
 
+		html = StrUtils.replaceAll(html, "[[AVATAR_DESCRIPTION]]", SideBarCtrl.getAvatarDescription(new SideBarEntryForEmployee("Zara")));
+
 		return html;
 	}
 
