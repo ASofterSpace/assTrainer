@@ -71,7 +71,7 @@ public class Question {
 	}
 
 	public int getPriority() {
-		return safeadd(priority, timeSinceAnswer);
+		return safeadd(priority, 15 * timeSinceAnswer);
 	}
 
 	public void answer(String answeredHowWell) {
@@ -82,12 +82,12 @@ public class Question {
 				priority = safesub(priority, 300);
 				break;
 			case "hard":
-				priority = safesub(priority, 150);
+				priority = safesub(priority, 120);
 				break;
 			case "close":
 				break;
 			case "wrong":
-				priority = safeadd(priority, 150);
+				priority = safeadd(priority, 120);
 				break;
 			case "critfail":
 				priority = safeadd(priority, 300);
