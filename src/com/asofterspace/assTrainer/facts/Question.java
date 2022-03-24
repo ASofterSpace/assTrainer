@@ -5,6 +5,7 @@
 package com.asofterspace.assTrainer.facts;
 
 import com.asofterspace.toolbox.io.HTML;
+import com.asofterspace.toolbox.utils.MathUtils;
 import com.asofterspace.toolbox.utils.Record;
 import com.asofterspace.toolbox.utils.StrUtils;
 
@@ -41,6 +42,8 @@ public class Question {
 	private boolean answeredNow = false;
 
 	private Answer answer;
+
+	private boolean inverted = false;
 
 
 	public Question(Record rec) {
@@ -133,9 +136,65 @@ public class Question {
 		return when;
 	}
 
-	public String toHtml() {
-		String result = HTML.escapeHTMLstr(text);
+	public String toHtml(boolean allowInverted) {
+		String result = HTML.escapeHTMLstr(getMaybeInvertedText(allowInverted));
 		return StrUtils.replaceAll(result, "&#10;", "<br>");
+	}
+
+	private String getMaybeInvertedText(boolean allowInverted) {
+
+		this.inverted = false;
+		getAnswer().setMaybeInvertedText(null);
+
+		String questext = getText();
+
+		if (questext == null) {
+			return "";
+		}
+
+		questext = questext.trim();
+
+		if (allowInverted &&
+			(questext.startsWith("Who is ") ||
+			 questext.startsWith("Who was ") ||
+			 questext.startsWith("Wer ist ") ||
+			 questext.startsWith("Wer war ")) &&
+			questext.endsWith("?")) {
+
+			inverted = MathUtils.randomBoolean();
+
+			if (inverted) {
+
+				// e.g. "Who is Mileva Maric?" to "Mileva Maric"
+				questext = questext.substring(questext.indexOf(" ") + 1);
+				questext = questext.substring(questext.indexOf(" ") + 1);
+				questext = questext.substring(0, questext.length() - 1);
+
+				// e.g. "Mileva Maric"
+				String name = questext;
+
+				// e.g. "Mileva Maric" to ["Mileva", "Maric"]
+				String[] nameParts = name.split(" ");
+
+				questext = getAnswer().getText();
+
+				for (String namePart : nameParts) {
+					questext = StrUtils.replaceAll(questext, namePart, "???");
+
+					if ("de".equals(namePart)) {
+						questext = StrUtils.replaceAll(questext, "???tailed", "detailed");
+					}
+				}
+
+				questext = StrUtils.replaceAllRepeatedly(questext, "??? ???", "???");
+
+				questext += "\n\nWho is or was this person?";
+
+				getAnswer().setMaybeInvertedText("This refers to:\n" + name);
+			}
+		}
+
+		return questext;
 	}
 
 	// prevent overflows

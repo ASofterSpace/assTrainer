@@ -126,7 +126,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		if (randomQuestion) {
 			newQ = FactsCtrl.getRandomQuestion();
 		}
-		res.set("questionHtml", newQ.toHtml());
+		res.set("questionHtml", newQ.toHtml(true));
 		res.set("answerHtml", newQ.getAnswer().toHtml());
 		res.set("questionId", newQ.getId());
 		res.set("timeSinceAnswer", newQ.getTimeSinceAnswer());
@@ -244,7 +244,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 
 			Question q = FactsCtrl.getNextQuestion();
 
-			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION]]", q.toHtml());
+			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION]]", q.toHtml(true));
 			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION_ID]]", q.getId());
 			indexContent = StrUtils.replaceAll(indexContent, "[[QUESTION_TIME_SINCE_ANSWER]]",
 				""+q.getTimeSinceAnswer());
@@ -291,7 +291,7 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 				factsHtml.append("<div class='line'>");
 
 				factsHtml.append("<div>");
-				factsHtml.append(q.toHtml());
+				factsHtml.append(q.toHtml(false));
 				factsHtml.append("</div>\n");
 
 				factsHtml.append("<div>");

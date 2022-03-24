@@ -14,6 +14,8 @@ public class Answer {
 
 	private String text;
 
+	private String maybeInvertedText = null;
+
 	private Question question;
 
 
@@ -26,8 +28,19 @@ public class Answer {
 		return text;
 	}
 
+	public String getMaybeInvertedText() {
+		if (maybeInvertedText == null) {
+			return getText();
+		}
+		return maybeInvertedText;
+	}
+
+	public void setMaybeInvertedText(String maybeInvertedText) {
+		this.maybeInvertedText = maybeInvertedText;
+	}
+
 	public String toHtml() {
-		String result = HTML.escapeHTMLstr(text);
+		String result = HTML.escapeHTMLstr(getMaybeInvertedText());
 		return StrUtils.replaceAll(result, "&#10;", "<br>");
 	}
 
