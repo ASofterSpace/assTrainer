@@ -181,6 +181,30 @@ public class Question {
 				for (String namePart : nameParts) {
 					questext = StrUtils.replaceAll(questext, namePart, "???");
 
+					int pos = questext.indexOf("(née ");
+					if (pos >= 0) {
+						String before = questext.substring(0, pos + 5);
+						String after = questext.substring(pos + 5).trim();
+						int posSpace = after.indexOf(" ");
+						int posComma = after.indexOf(",");
+						if (posSpace >= 0) {
+							if (posComma >= 0) {
+								if (posSpace < posComma) {
+									after = after.substring(posSpace);
+								} else {
+									after = after.substring(posComma);
+								}
+							} else {
+								after = after.substring(posSpace);
+							}
+						} else {
+							if (posComma >= 0) {
+								after = after.substring(posComma);
+							}
+						}
+						questext = before + "???" + after;
+					}
+
 					if ("de".equals(namePart)) {
 						questext = StrUtils.replaceAll(questext, "???tailed", "detailed");
 					}
