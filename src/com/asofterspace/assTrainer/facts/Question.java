@@ -179,6 +179,10 @@ public class Question {
 				questext = getAnswer().getText();
 
 				for (String namePart : nameParts) {
+					if (namePart.equals("de")) {
+						continue;
+					}
+
 					questext = StrUtils.replaceAll(questext, namePart, "???");
 
 					int pos = questext.indexOf("(née ");
@@ -204,11 +208,9 @@ public class Question {
 						}
 						questext = before + "???" + after;
 					}
-
-					if ("de".equals(namePart)) {
-						questext = StrUtils.replaceAll(questext, "???tailed", "detailed");
-					}
 				}
+
+				questext = StrUtils.replaceAllRepeatedly(questext, "??? de ???", "???");
 
 				questext = StrUtils.replaceAllRepeatedly(questext, "??? ???", "???");
 
