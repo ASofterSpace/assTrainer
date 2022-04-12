@@ -42,6 +42,7 @@ public class SportsCtrl {
 		List<Exercise> exercises = new ArrayList<>();
 
 		if (!"arms".equals(leaveout)) {
+			exercises.add(new Exercise("Handstand an der Wand (versuchen, sich lang zu machen, um Körperspannung zu gewinnen)", 3));
 			exercises.add(new Exercise("Liegestütze / Pushups", 3));
 			exercises.add(new Exercise("Renegade Rows (Pushups but pull up an (imaginary) weight with one arm, then the other, then a pushup, then from the beginning)", 3));
 			exercises.add(new Exercise("stufenweise Liegestütze / Pushups", 3));
@@ -51,6 +52,7 @@ public class SportsCtrl {
 			exercises.add(new Exercise("Middle to Pushup to Middle to Sunseeker to Middle", 3));
 			exercises.add(new Exercise("Plank Hold", 3));
 			exercises.add(new Exercise("Plank Walk (move Elbows while keeping feet constant)", 3));
+			exercises.add(new Exercise("Vertical Plank Walk (like plank walk but switching between low and high plank)", 3));
 			exercises.add(new Exercise("Good Morning", 3));
 			exercises.add(new Exercise("Arme ausstrecken und 3 Minuten ausgestreckt lassen (einmal mit linker Handfläche oben, einmal mit rechter)", 2));
 		}
@@ -102,7 +104,6 @@ public class SportsCtrl {
 			exercises.add(new Exercise("Scapula Pullups (Dead Hang but performing a pullup motion in the shoulders, up and down, ...)", 3));
 			exercises.add(new Exercise("Knee Pullups (Dead Hang but pulling the knees up to the chest and down, up and down, ...)", 3));
 			exercises.add(new Exercise("Jemensch an den Fußgelenken anheben und Schubkarre-mäßig rumwackeln", 1));
-			exercises.add(new Exercise("Handstand an der Wand", 3));
 		}
 
 		if (!"legs".equals(leaveout)) {
