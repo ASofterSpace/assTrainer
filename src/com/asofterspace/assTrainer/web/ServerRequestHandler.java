@@ -324,7 +324,16 @@ public class ServerRequestHandler extends WebServerRequestHandler {
 		for (int i = 0; i < howMany; i++) {
 
 			int cur = rand.nextInt(exercises.size());
+
+			// if a handstand is on offer, add that to the first as first item as I want to train it more!
+			for (int exNum = 0; exNum < exercises.size(); exNum++) {
+				if (exercises.get(exNum).getName().startsWith("Handstand an der Wand")) {
+					cur = exNum;
+				}
+			}
+
 			Exercise ex = exercises.get(cur);
+
 			lineId++;
 			exHtml.append("<div id=\"line-" + lineId + "\" class=\"" + ex.getClassName() + "\" " +
 				"onclick=\"trainer.lineClick(" + lineId + ");\" " +
