@@ -84,6 +84,7 @@ public class SportsCtrl {
 		exercises.add(new Exercise("Mountain Climbers", 3));
 		exercises.add(new Exercise("Standwaage", 3));
 		exercises.add(new Exercise("auf dem Rücken liegen und Fahrrad fahren", 3));
+		exercises.add(new Exercise("Klappmesser (möglicherweise mit Seil)", 3));
 
 		return exercises;
 	}
