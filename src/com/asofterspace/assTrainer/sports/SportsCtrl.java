@@ -72,6 +72,7 @@ public class SportsCtrl {
 		if ((!"arms".equals(leaveout)) && (!"legs".equals(leaveout))) {
 			exercises.add(new Exercise("Burpees", 3));
 			exercises.add(new Exercise("Burpees (aber einen Fuß antippen, dann den anderen, anstatt einen Liegestütz zu machen)", 3));
+			exercises.add(new Exercise("Burpee-Variationen (seitlich / rückwärts, also Beine voraus)", 3));
 		}
 
 		exercises.add(new Exercise("Reverse Crunch (lie on your back, legs straight, and bring them up, and down, and up, and down...)", 3));
