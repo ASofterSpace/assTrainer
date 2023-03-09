@@ -44,6 +44,7 @@ public class SportsCtrl {
 		if (!"arms".equals(leaveout)) {
 			exercises.add(new Exercise("Handstand an der Wand (versuchen, sich lang zu machen, um Körperspannung zu gewinnen)", 3));
 			exercises.add(new Exercise("Liegestütze / Pushups", 3));
+			exercises.add(new Exercise("Underskips (Liegestützhaltung, dann Bein seitlich rechtwicklig ausstrecken, zurück, anderes Bein, ...)", 3));
 			exercises.add(new Exercise("Renegade Rows (Pushups but pull up an (imaginary) weight with one arm, then the other, then a pushup, then from the beginning)", 3));
 			exercises.add(new Exercise("stufenweise Liegestütze / Pushups", 3));
 			exercises.add(new Exercise("Inverted Pushups (down however you want, but up nicely)", 3));
