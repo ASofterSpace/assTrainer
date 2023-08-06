@@ -73,7 +73,6 @@ div#tabList > a.selectedTab {
 div#mainContent {
 	overflow-y: scroll;
 	overflow-x: hidden;
-	padding-right: 15%;
 }
 
 div#mainContent, div.scrollable {
