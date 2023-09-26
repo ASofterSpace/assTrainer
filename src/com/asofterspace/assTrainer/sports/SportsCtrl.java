@@ -48,6 +48,9 @@ public class SportsCtrl {
 			exercises.add(new Exercise("Renegade Rows (Pushups but pull up an (imaginary) weight with one arm, then the other, then a pushup, then from the beginning)", 3));
 			exercises.add(new Exercise("stufenweise Liegestütze / Pushups", 3));
 			exercises.add(new Exercise("Inverted Pushups (down however you want, but up nicely)", 3));
+			exercises.add(new Exercise("Scapula Pushups (like regular pushups but scapula only... so a wobbly plank hold ^^)", 3));
+			exercises.add(new Exercise("Full Pushups (scapula pushup + regular pushup in one flowing motion)", 3));
+			exercises.add(new Exercise("Pushup Circle (pushups but in a circular movement up-right-down-left-... rather than up-down)", 3));
 			exercises.add(new Exercise("Pike Pushups (so pushups in pike position)", 3));
 			exercises.add(new Exercise("Pike to Pushup (from pushup to pike position, back and forth)", 3));
 			exercises.add(new Exercise("Middle to Pushup to Middle to Sunseeker to Middle", 3));
